@@ -90,13 +90,8 @@ class MainActivity : AppCompatActivity() {
     private fun checkAnswer(userAnswer: Boolean) {
         val correctAnswer = quizViewModel.currentQuestionAnswer
         val messageResId = when {
-            userAnswer == correctAnswer -> {
-                if (quizViewModel.isCurrentQuestionCheated()) {
-                    R.string.judgment_toast
-                } else {
-                    R.string.correct_toast
-                }
-            }
+            quizViewModel.isCheater -> R.string.judgment_toast
+            userAnswer == correctAnswer -> R.string.correct_toast
             else -> R.string.incorrect_toast
         }
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT)
